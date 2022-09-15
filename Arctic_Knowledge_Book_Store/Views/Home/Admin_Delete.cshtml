@@ -1,0 +1,35 @@
+﻿@model Arctic_Knowledge_Book_Store.Models.Stock
+
+@{
+    ViewBag.Title = "Admin_Delete";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<center>
+    <h2>Remove a Book</h2>
+
+    <h4>Are you sure you want to remove this?</h4>
+    <div class="card mb-3" style="max-width: 540px;">
+        <div class="row g-0">
+            <div class="col-md-4">
+                <img src="/Home/RetrieveImage/@Model.Book.ID" class="img-fluid rounded-start" alt="...">
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h5 class="card-title">@Model.Book.Name</h5>
+                    <p class="card-text" style="font-style:italic">By @Model.Book.Author</p>
+                    <form asp-controller="Home" asp-action="Admin_Delete" method="post">
+                        <div class="form-actions no-color">
+                            <input type="submit" value="Remove" class="btn btn-danger btn-lg" />
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="mb-3">
+        <span>
+            <a href="@Url.Action("Admin_View","Home")" class="btn btn-outline-secondary btn-lg" tabindex="-1" role="button" aria-disabled="true">Book List</a>
+        </span>
+    </div>
+</center>

@@ -1,0 +1,81 @@
+﻿@model IEnumerable<Arctic_Knowledge_Book_Store.Models.Stock>
+
+@{
+    ViewBag.Title = "Admin_View";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="body-content">
+    <h2 style="text-align:center">Books in Stock</h2>
+
+    <p>
+        <a href="@Url.Action("Admin_Add","Home")" class="btn btn-primary btn-lg" tabindex="-1" role="button" aria-disabled="true">Add a Book</a>
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                Book ID
+            </th>
+            <th>
+                Name
+            </th>
+            <th>
+                Author
+            </th>
+            <th>
+                Publication
+            </th>
+            <th>
+                ISBN
+            </th>
+            <th>
+                Price
+            </th>
+            <th>
+                Quantity
+            </th>
+            <th>
+                Image
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Book.ID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Book.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Book.Author)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Book.Publication)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Book.ISBN)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Book.Price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Quantity)
+                </td>
+                <td>
+                    <img src="/Home/RetrieveImage/@item.Book.ID" alt="" height=180 width=125 />
+                </td>
+                <td>
+                    <a href="@Url.Action("Admin_Edit","Home",new { id=item.ID})" class="btn btn-info btn-sm text-white" tabindex="-1" role="button" aria-disabled="true">Edit</a>
+                    <a href="@Url.Action("Admin_Delete","Home",new { id=item.ID})" class="btn btn-danger btn-sm text-light" tabindex="-1" role="button" aria-disabled="true">Delete</a>
+
+                    @*@Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.ID })*@
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>

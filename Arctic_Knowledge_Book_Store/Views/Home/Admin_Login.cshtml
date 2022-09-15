@@ -1,0 +1,51 @@
+﻿@model Arctic_Knowledge_Book_Store.Models.Admin
+
+@{
+    ViewBag.Title = "Admin Login";
+}
+
+<link href="~/Styles/admin_login.css" rel="stylesheet" />
+<div class="wthree-dot">
+    <h1 style="font-weight:bolder">Arctic Knowledge</h1>
+    <h3>Admin Login & Sign Up</h3>
+    <div class="profile">
+        <div class="wrap">
+            <div class="content-main">
+                <div class="w3ls-subscribe w3ls-subscribe1">
+                    <h4>Already have an account?</h4>
+                    @using (Html.BeginForm("Admin_Login", "Home", FormMethod.Post))
+                    {
+                        @Html.EditorFor(model => model.ID, new { htmlAttributes = new { placeholder = "Admin ID", required = "" } })
+                        @Html.PasswordFor(model => model.Password, htmlAttributes: new { placeholder = "Password", required = "" })<br />
+                        <span style="color: red">@ViewBag.msg</span>
+                        <input type="submit" value="Login">
+
+                    }
+
+                </div>
+            </div>
+            <div class="content-main content-main1">
+                <div class="w3ls-subscribe">
+                    <h4>New Admin?</h4>
+                    @using (Html.BeginForm("Admin_Reg", "Home", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+
+                        @Html.ValidationMessageFor(model => model.ID, "", new { @class = "text-danger", style = "color:red" })
+                        @Html.TextBoxFor(model => model.ID, htmlAttributes: new { placeholder = "Enter a valid Admin ID", required = "" })<br>
+                        @Html.TextBoxFor(model => model.FirstName, htmlAttributes: new { placeholder = "Enter the First Name", required = "" })
+                        @Html.TextBoxFor(model => model.LastName, htmlAttributes: new { placeholder = "Enter the Last Name", required = "" })
+                        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger", style = "color:red" })<br>
+                        @Html.TextBoxFor(model => model.Email, htmlAttributes: new { placeholder = "Enter the Email", required = "", type = "email" })<br>
+                        @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger", style = "color:red" })
+                        @Html.PasswordFor(model => model.Password, htmlAttributes: new { placeholder = "Enter a Password", required = "" })
+                        <span style="color:red">@ViewBag.pass</span>
+                        <input type="password" name="confirmPass" placeholder="Confirm Password" required="">
+                        <input type="submit" value="Register">
+
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,54 @@
+﻿@model Arctic_Knowledge_Book_Store.Models.Customer
+
+@{
+    ViewBag.Title = "Customer Login";
+}
+
+<link href="~/Styles/customer_login.css" rel="stylesheet" />
+<script src="~/Styles/jquery-2.1.4.min.js"></script>
+<div class="main">
+    <canvas id="myCanvas"></canvas>
+    <div class="main-w3l">
+        <h1 class="logo-w3">Arctic Knowledge</h1>
+        @if (Model != null)
+        {
+            <div class="alert alert-success" role="alert">
+                Customer <b>@Model.FirstName @Model.LastName</b> is Resigtered Successfully!
+            </div>
+        }
+    <div class="alert alert-success" role="alert">
+        @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger", style = "color:red" })
+    </div>
+        <div class="w3layouts-main">
+            <h2>Login Now</h2>
+            @using (Html.BeginForm("Customer_Login", "Home", FormMethod.Post))
+            {
+                @Html.TextBoxFor(model => model.Username, htmlAttributes: new { placeholder = "USERNAME", required = "" })
+                @Html.PasswordFor(model => model.Password, htmlAttributes: new { placeholder = "PASSWORD", required = "" })<br />
+                <span style="color: red">@ViewBag.msg</span><br />
+                <input type="submit" value="Login">
+            }
+        </div>
+        <div class="w3layouts-main2">
+            <h3>Register Now</h3>
+            @using (Html.BeginForm("Customer_Reg", "Home", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+
+                @Html.TextBoxFor(model => model.FirstName, htmlAttributes: new { placeholder = "Enter the First Name", required = "" })
+                @Html.TextBoxFor(model => model.LastName, htmlAttributes: new { placeholder = "Enter the Last Name", required = "" })
+                @Html.TextBoxFor(model => model.Email, htmlAttributes: new { placeholder = "Enter the Email", required = "", type = "email" })<br />
+                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger", style = "color:red" })
+                @Html.TextBoxFor(model => model.Username, htmlAttributes: new { placeholder = "Enter a Username", name = "username" })<br />
+                <span style="color:red">@ViewBag.user</span>
+                @Html.PasswordFor(model => model.Password, htmlAttributes: new { placeholder = "Enter a Password", required = "" })<br />
+                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger", style = "color:red" })
+                <input type="password" name="confirmPass" placeholder="Confirm Password" required=""><br />
+                <span style="color:red">@ViewBag.pass</span><br />
+                <input type="submit" value="Register">
+            }
+        </div>
+        <div class="clear"></div>
+    </div>
+</div>
+
